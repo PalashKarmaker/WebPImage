@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Moraba.Image.Webp</AssemblyName>
     <RootNamespace>Moraba.Image.Webp</RootNamespace>
-    <PackageId>Moraba.Images.Webp.Core</PackageId>
+    <PackageId>Images.Webp.Core.Net6</PackageId>
     <Authors>Mojtaba Moradi (mojtabamoradi.net@outlook.com)</Authors>
     <Product>Moraba.Images.Webp.Core</Product>
     <Description>simple and light .netcore package for work with images.
@@ -22,10 +22,20 @@ convert from static path and web path.</Description>
     <Version>1.1.1</Version>
     <AssemblyVersion>1.1.1</AssemblyVersion>
     <FileVersion>1.1.1</FileVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="6.0.0-rc.2.21480.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="libwebp_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="libwebp_x86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
