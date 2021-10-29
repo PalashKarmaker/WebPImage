@@ -13,7 +13,7 @@ namespace Moraba.Images.Webp
         /// <summary>Read a WebP file</summary>
         /// <param name="pathFileName">ebP file to load</param>
         /// <returns>Byte[] with the WebP image</returns>
-        public byte[] LoadByte(string pathFileName)
+        public static byte[] LoadByte(string pathFileName)
         {
             try
             {
@@ -46,8 +46,6 @@ namespace Moraba.Images.Webp
         /// <returns>Bitmap with the WebP image</returns>
         public Bitmap Decode(byte[] rawWebP)
         {
-            int imgWidth;
-            int imgHeight;
             int outputSize;
             Bitmap bmp = null;
             BitmapData bmpData = null;
@@ -57,7 +55,7 @@ namespace Moraba.Images.Webp
             {
                 //Get image width and height
                 IntPtr ptrData = pinnedWebP.AddrOfPinnedObject();
-                if (UnsafeNativeMethods.WebPGetInfo(ptrData, rawWebP.Length, out imgWidth, out imgHeight) == 0)
+                if (UnsafeNativeMethods.WebPGetInfo(ptrData, rawWebP.Length, out int imgWidth, out int imgHeight) == 0)
                     throw new Exception("Can´t get information of WebP");
 
                 //Create a BitmapData and Lock all pixels to be written

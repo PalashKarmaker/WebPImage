@@ -26,7 +26,7 @@ namespace Moraba.Images.Webp
                 if (String.IsNullOrEmpty(sourcePath) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
                 using (WebP webp = new WebP())
                 {
-                    var webp_byte = webp.LoadByte(sourcePath);
+                    var webp_byte = WebP.LoadByte(sourcePath);
                     Bitmap bmp;
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }
@@ -193,7 +193,7 @@ namespace Moraba.Images.Webp
                 using (WebP webp = new WebP())
                 {
                     var bmp = webp.Load(sourcePath);
-                    var webp_byte = webp.LoadByte(sourcePath);
+                    var webp_byte = WebP.LoadByte(sourcePath);
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, bmp.Width, bmp.Height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, bmp.Width, bmp.Height); }
                     bmp.Save(destPath, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -218,7 +218,7 @@ namespace Moraba.Images.Webp
                 if (String.IsNullOrEmpty(sourcePath) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
                 using (WebP webp = new WebP())
                 {
-                    var webp_byte = webp.LoadByte(sourcePath);
+                    var webp_byte = WebP.LoadByte(sourcePath);
                     Bitmap bmp;
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }
@@ -243,7 +243,7 @@ namespace Moraba.Images.Webp
                 using (WebP webp = new WebP())
                 {
                     var bmp = webp.Load(sourcePath);
-                    var webp_byte = webp.LoadByte(sourcePath);
+                    var webp_byte = WebP.LoadByte(sourcePath);
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, bmp.Width, bmp.Height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, bmp.Width, bmp.Height); }
                     bmp.Save(destPath, System.Drawing.Imaging.ImageFormat.Png);
@@ -268,7 +268,7 @@ namespace Moraba.Images.Webp
                 if (String.IsNullOrEmpty(sourcePath) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
                 using (WebP webp = new WebP())
                 {
-                    var webp_byte = webp.LoadByte(sourcePath);
+                    var webp_byte = WebP.LoadByte(sourcePath);
                     Bitmap bmp;
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }

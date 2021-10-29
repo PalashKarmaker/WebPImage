@@ -1,9 +1,6 @@
-﻿
-using Moraba.Images.Webp;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Moraba.Images.Webp
 {
@@ -18,14 +15,14 @@ namespace Moraba.Images.Webp
         /// <param name="height">height that image resized to them</param>
         /// <param name="compress">compress image if that true</param>
         /// <returns>return true if do correctly else return false</returns>
-        public static bool ResizeWebPFromWeb(string sourceUrl, string destPath, int width, int height, bool compress = false)
+        public static async Task<bool> ResizeWebPFromWebAsync(string sourceUrl, string destPath, int width, int height, bool compress = false)
         {
             try
             {
-                if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
-                using (WebP webp = new WebP())
+                if (string.IsNullOrEmpty(sourceUrl) || string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
+                using (WebP webp = new())
                 {
-                    var stream = Helper.DownloadImage(sourceUrl);
+                    var stream = await Helper.DownloadImageAsync(sourceUrl);
                     var webp_byte = Helper.ReadByte(stream);
                     Bitmap bmp;
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
@@ -48,10 +45,10 @@ namespace Moraba.Images.Webp
         {
             try
             {
-                if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
+                if (string.IsNullOrEmpty(sourceUrl) || string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
                 using (WebP webp = new WebP())
                 {
-                    Bitmap bmp = new Bitmap(Helper.DownloadImage(sourceUrl));
+                    Bitmap bmp = new Bitmap(Helper.DownloadImageAsync(sourceUrl).Result);
                     var webp_byte = webp.EncodeLossless(bmp);
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }
@@ -74,9 +71,9 @@ namespace Moraba.Images.Webp
             try
             {
                 if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
-                using (WebP webp = new WebP())
+                using (WebP webp = new())
                 {
-                    Bitmap bmp = new Bitmap(Helper.DownloadImage(sourceUrl));
+                    Bitmap bmp = new(Helper.DownloadImageAsync(sourceUrl).Result);
                     var webp_byte = webp.EncodeLossless(bmp);
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
                     else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }
@@ -99,9 +96,9 @@ namespace Moraba.Images.Webp
                 if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath)) return false;
                 if (quality <= 0 || quality > 100) { quality = 100; }
 
-                using (WebP webp = new WebP())
+                using (WebP webp = new())
                 {
-                    Bitmap bmp = new Bitmap(Helper.DownloadImage(sourceUrl));
+                    Bitmap bmp = new(Helper.DownloadImageAsync(sourceUrl).Result);
                     webp.Save(bmp, destPath, quality);
                 }
                 return true;
@@ -120,9 +117,9 @@ namespace Moraba.Images.Webp
             {
                 if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath)) return false;
                 if (quality <= 0 || quality > 100) { quality = 100; }
-                using (WebP webp = new WebP())
+                using (WebP webp = new())
                 {
-                    Bitmap bmp = new Bitmap(Helper.DownloadImage(sourceUrl));
+                    Bitmap bmp = new(Helper.DownloadImageAsync(sourceUrl).Result);
                     webp.Save(bmp, destPath, quality);
                 }
                 return true;
@@ -144,9 +141,9 @@ namespace Moraba.Images.Webp
             {
                 if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
                 if (quality <= 0 || quality > 100) { quality = 100; }
-                using (WebP webp = new WebP())
+                using (WebP webp = new())
                 {
-                    Bitmap bmp = new Bitmap(Helper.DownloadImage(sourceUrl));
+                    Bitmap bmp = new(Helper.DownloadImageAsync(sourceUrl).Result);
                     var webp_byte = webp.EncodeLossless(bmp);
                     bmp = webp.GetThumbnailQuality(webp_byte, width, height);
                     webp.Save(bmp, destPath, quality);
@@ -161,14 +158,14 @@ namespace Moraba.Images.Webp
         /// <param name="destPath">destination image path that saved image there</param> 
         /// <param name="compress">compress image if that true</param>
         /// <returns>return true if do correctly else return false</returns>
-        public static bool WebPToJpegFromWeb(string sourceUrl, string destPath, bool compress = false)
+        public static async Task<bool> WebPToJpegFromWebAsync(string sourceUrl, string destPath, bool compress = false)
         {
             try
             {
-                if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath)) return false;
-                using (WebP webp = new WebP())
+                if (string.IsNullOrEmpty(sourceUrl) || string.IsNullOrEmpty(destPath)) return false;
+                using (WebP webp = new())
                 {
-                    var stream = Helper.DownloadImage(sourceUrl);
+                    var stream = await Helper.DownloadImageAsync(sourceUrl);
                     var webp_byte = Helper.ReadByte(stream);
                     var bmp = new Bitmap(stream);
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, bmp.Width, bmp.Height); }
@@ -188,14 +185,14 @@ namespace Moraba.Images.Webp
         /// <param name="height">height that image resized to them</param>
         /// <param name="compress">compress image if that true</param>
         /// <returns>return true if do correctly else return false</returns>
-        public static bool WebPToJpegFromWeb(string sourceUrl, string destPath, int width, int height, bool compress = false)
+        public static async Task<bool> WebPToJpegFromWebAsync(string sourceUrl, string destPath, int width, int height, bool compress = false)
         {
             try
             {
-                if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
-                using (WebP webp = new WebP())
+                if (string.IsNullOrEmpty(sourceUrl) || string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
+                using (WebP webp = new())
                 { 
-                    var stream = Helper.DownloadImage(sourceUrl);
+                    var stream = await Helper.DownloadImageAsync(sourceUrl);
                     var webp_byte = Helper.ReadByte(stream); 
                     Bitmap bmp;
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
@@ -213,14 +210,14 @@ namespace Moraba.Images.Webp
         /// <param name="destPath">destination image path that saved image there</param> 
         /// <param name="compress">compress image if that true</param>
         /// <returns>return true if do correctly else return false</returns>
-        public static bool WebPToPngFromWeb(string sourceUrl, string destPath, bool compress = false)
+        public static async Task<bool> WebPToPngFromWebAsync(string sourceUrl, string destPath, bool compress = false)
         {
             try
             {
-                if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath)) return false;
-                using (WebP webp = new WebP())
+                if (string.IsNullOrEmpty(sourceUrl) || string.IsNullOrEmpty(destPath)) return false;
+                using (WebP webp = new())
                 {
-                    var stream = Helper.DownloadImage(sourceUrl);
+                    var stream = await Helper.DownloadImageAsync(sourceUrl);
                     var webp_byte = Helper.ReadByte(stream);
                     var bmp = new Bitmap(stream);
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, bmp.Width, bmp.Height); }
@@ -240,14 +237,14 @@ namespace Moraba.Images.Webp
         /// <param name="height">height that image resized to them</param>
         /// <param name="compress">compress image if that true</param>
         /// <returns>return true if do correctly else return false</returns>
-        public static bool WebPToPngFromWeb(string sourceUrl, string destPath, int width, int height, bool compress = false)
+        public static async Task<bool> WebPToPngFromWebAsync(string sourceUrl, string destPath, int width, int height, bool compress = false)
         {
             try
             {
-                if (String.IsNullOrEmpty(sourceUrl) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
-                using (WebP webp = new WebP())
+                if (string.IsNullOrEmpty(sourceUrl) || string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
+                using (WebP webp = new())
                 {
-                    var stream = Helper.DownloadImage(sourceUrl);
+                    var stream = await Helper.DownloadImageAsync(sourceUrl);
                     var webp_byte = Helper.ReadByte(stream);
                     Bitmap bmp;
                     if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
