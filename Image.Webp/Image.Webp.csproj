@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <AssemblyName>Moraba.Image.Webp</AssemblyName>
     <RootNamespace>Moraba.Image.Webp</RootNamespace>
     <PackageId>Moraba.Images.Webp.Core</PackageId>
@@ -19,7 +19,9 @@ convert from static path and web path.</Description>
     <PackageReleaseNotes>on this version convert images from web address.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
+    <FileVersion>1.1.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
