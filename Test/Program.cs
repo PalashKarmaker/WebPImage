@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using WP = Moraba.Images.Webp;
+using WP = ImageConversion;
 namespace Test
 {
     class Program
@@ -20,7 +20,7 @@ namespace Test
                 Console.WriteLine("Done");
                 Console.Read();
 
-                //Moraba.Images.Webp.Convert.PngToWebPFromWeb("https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "webp.webp", 100, 50);
+                //ImageConversion.Convert.PngToWebPFromWeb("https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png", "webp.webp", 100, 50);
                 //convert web png image to webp and save on local path
             }
             catch (Exception ex)

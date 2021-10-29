@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace Moraba.Images.Webp
+namespace ImageConversion
 {
     sealed class WebP : IDisposable
     {
@@ -13,33 +13,13 @@ namespace Moraba.Images.Webp
         /// <summary>Read a WebP file</summary>
         /// <param name="pathFileName">ebP file to load</param>
         /// <returns>Byte[] with the WebP image</returns>
-        public static byte[] LoadByte(string pathFileName)
-        {
-            try
-            {
-                //Read webP file
-                byte[] rawWebP = File.ReadAllBytes(pathFileName);
-
-                return rawWebP;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message + "\r\nIn WebP.Load"); }
-        }
+        public static byte[] LoadByte(string pathFileName) => File.ReadAllBytes(pathFileName);
 
 
         /// <summary>Read a WebP file</summary>
         /// <param name="pathFileName">WebP file to load</param>
         /// <returns>Bitmap with the WebP image</returns>
-        public Bitmap Load(string pathFileName)
-        {
-            try
-            {
-                //Read webP file
-                byte[] rawWebP = File.ReadAllBytes(pathFileName);
-
-                return Decode(rawWebP);
-            }
-            catch (Exception ex) { throw new Exception(ex.Message + "\r\nIn WebP.Load"); }
-        }
+        public Bitmap Load(string pathFileName) => Decode(File.ReadAllBytes(pathFileName));
 
         /// <summary>Decode a WebP image</summary>
         /// <param name="rawWebP">The data to uncompress</param>
@@ -1179,7 +1159,7 @@ namespace Moraba.Images.Webp
             }
         }
         [DllImport("libwebp_x86.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPDecodeBGRInto")]
-        private static extern int WebPDecodeBGRInto_x86([InAttribute()] IntPtr data, UIntPtr data_size, IntPtr output_buffer, int output_buffer_size, int output_stride);
+        private static extern int WebPDecodeBGRInto_x86([In()] IntPtr data, UIntPtr data_size, IntPtr output_buffer, int output_buffer_size, int output_stride);
         [DllImport("libwebp_x64.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "WebPDecodeBGRInto")]
         private static extern int WebPDecodeBGRInto_x64([InAttribute()] IntPtr data, UIntPtr data_size, IntPtr output_buffer, int output_buffer_size, int output_stride);
 
