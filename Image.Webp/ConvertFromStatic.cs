@@ -96,9 +96,9 @@ namespace Moraba.Images.Webp
         {
             try
             {
-                if (String.IsNullOrEmpty(sourcePath) || String.IsNullOrEmpty(destPath)) return false;
+                if (string.IsNullOrEmpty(sourcePath) || string.IsNullOrEmpty(destPath)) return false;
                 if (quality <= 0 || quality > 100) { quality = 100; }
-                using (WebP webp = new WebP())
+                using (WebP webp = new())
                 {
                     Bitmap bmp = new Bitmap(sourcePath);
                     webp.Save(bmp, destPath, quality);
@@ -117,23 +117,34 @@ namespace Moraba.Images.Webp
         /// <returns>return true if do correctly else return false</returns>
         public static bool JpegToWebP(string sourcePath, string destPath, int width, int height, int quality = 100)
         {
-            try
+            if (string.IsNullOrEmpty(sourcePath) || string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
+            if (quality <= 0 || quality > 100) { quality = 100; }
+            using (WebP webp = new())
             {
-                if (String.IsNullOrEmpty(sourcePath) || String.IsNullOrEmpty(destPath) || width <= 0 || height <= 0) return false;
-                if (quality <= 0 || quality > 100) { quality = 100; }
-                using (WebP webp = new WebP())
-                {
-                    Bitmap bmp = new Bitmap(sourcePath);
-                    var webp_byte = webp.EncodeLossless(bmp);
-                    bmp = webp.GetThumbnailQuality(webp_byte, width, height);
-                    webp.Save(bmp, destPath, quality);
-                }
-                return true;
-
+                Bitmap bmp = new(sourcePath);
+                var webp_byte = webp.EncodeLossless(bmp);
+                bmp = webp.GetThumbnailQuality(webp_byte, width, height);
+                webp.Save(bmp, destPath, quality);
             }
-            catch { throw; }
+            return true;
         }
 
+        public static bool ToWebP(Stream imgStream, string destPath, Size? size = null, int quality = 100)
+        {
+            if (string.IsNullOrEmpty(destPath)) return false;
+            if (quality <= 0 || quality > 100) { quality = 100; }
+            using (WebP webp = new())
+            {
+                Bitmap bmp = new(imgStream);
+                if (size.HasValue)
+                {
+                    var webp_byte = webp.EncodeLossless(bmp);
+                    bmp = webp.GetThumbnailQuality(webp_byte, size.Value.Width, size.Value.Height);
+                }
+                webp.Save(bmp, destPath, quality);
+            }
+            return true;
+        }
         /// <summary>convert png image to webp</summary>
         /// <param name="sourcePath">valid source image path</param>
         /// <param name="destPath">destination image path that saved image there</param> 

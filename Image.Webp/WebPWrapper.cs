@@ -44,7 +44,7 @@ namespace Moraba.Images.Webp
         /// <summary>Decode a WebP image</summary>
         /// <param name="rawWebP">The data to uncompress</param>
         /// <returns>Bitmap with the WebP image</returns>
-        public Bitmap Decode(byte[] rawWebP)
+        public static Bitmap Decode(byte[] rawWebP)
         {
             int outputSize;
             Bitmap bmp = null;
@@ -86,7 +86,7 @@ namespace Moraba.Images.Webp
         /// <param name="rawWebP">the data to uncompress</param>
         /// <param name="options">Options for advanced decode</param>
         /// <returns>Bitmap with the WebP image</returns>
-        Bitmap Decode(byte[] rawWebP, WebPDecoderOptions options)
+        static Bitmap Decode(byte[] rawWebP, WebPDecoderOptions options)
         { 
             GCHandle pinnedWebP = GCHandle.Alloc(rawWebP, GCHandleType.Pinned);
             Bitmap bmp = null;
