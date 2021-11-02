@@ -24,6 +24,20 @@ public class Convert
         webp.Save(bmp, destPath, quality);
         bmp.Dispose();
     }
+    public static byte[] ToWebPByte(Stream imgStream, Size? size = null, int quality = 100)
+    {
+        if (quality <= 0 || quality > 100) { quality = 100; }
+        using WebP webp = new();
+        Bitmap bmp = new(imgStream);
+        if (size.HasValue)
+        {
+            var webp_byte = webp.EncodeLossless(bmp);
+            bmp = webp.GetThumbnailQuality(webp_byte, size.Value.Width, size.Value.Height);
+        }
+        var data = webp.EncodeLossy(bmp, quality);
+        bmp.Dispose();
+        return data;
+    }
     public static void Resize(Stream imgStream, string destPath, int width, int height, ImageFormat? format = null, bool compress = false)
     {
         if (string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0)
