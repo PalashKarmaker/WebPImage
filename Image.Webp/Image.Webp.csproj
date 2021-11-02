@@ -19,7 +19,7 @@ convert from static path and web path.</Description>
     <PackageReleaseNotes>on this version convert images from web address.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0</Version>
+    <Version>1.0.1</Version>
     <AssemblyVersion>1.1.1</AssemblyVersion>
     <FileVersion>1.1.1</FileVersion>
     <ImplicitUsings>enable</ImplicitUsings>
