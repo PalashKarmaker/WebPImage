@@ -43,7 +43,7 @@ public class Convert
         if (string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0)
             throw new DirectoryNotFoundException();        
         using WebP webp = new();
-        Bitmap bmp = new Bitmap(imgStream);
+        Bitmap bmp = new(imgStream);
         var webp_byte = webp.EncodeLossless(bmp);
         if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
         else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }

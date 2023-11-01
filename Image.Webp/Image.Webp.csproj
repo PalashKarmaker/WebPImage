@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>ImageConversion</AssemblyName>
     <RootNamespace>ImageConversion</RootNamespace>
     <PackageId>ImageConversion</PackageId>
@@ -19,9 +19,9 @@ convert from static path and web path.</Description>
     <PackageReleaseNotes>on this version convert images from web address.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.1.1</AssemblyVersion>
-    <FileVersion>1.1.1</FileVersion>
+    <Version>1.1.2</Version>
+    <AssemblyVersion>1.1.2</AssemblyVersion>
+    <FileVersion>1.1.2</FileVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageIcon>ImageConversion.jpg</PackageIcon>
   </PropertyGroup>
@@ -34,7 +34,7 @@ convert from static path and web path.</Description>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0-rc.2.21480.5" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.0-rc.2.23479.14" />
   </ItemGroup>
 
   <ItemGroup>
