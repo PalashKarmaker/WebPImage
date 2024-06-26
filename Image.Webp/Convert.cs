@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.Versioning;
 
 namespace ImageConversion;
 
@@ -7,8 +8,9 @@ namespace ImageConversion;
 /// <para>developed by mojtaba moradi (mojtabamoradi.net@outlook.com)</para>
 /// <para>inspired by Wrapper for WebP format in C#. (GPL) Jose M. Piñeiro</para>
 /// </summary>
-public class Convert
+public static class Convert
 {
+    
     public static void ToWebP(Stream imgStream, string destPath, Size? size = null, int quality = 100)
     {
         if (string.IsNullOrEmpty(destPath)) 
@@ -24,6 +26,7 @@ public class Convert
         WebP.Save(bmp, destPath, quality);
         bmp.Dispose();
     }
+    
     public static byte[] ToWebPByte(Stream imgStream, Size? size = null, int quality = 100)
     {
         if (quality <= 0 || quality > 100) { quality = 100; }
@@ -38,6 +41,7 @@ public class Convert
         bmp.Dispose();
         return data;
     }
+    
     public static void Resize(Stream imgStream, string destPath, int width, int height, ImageFormat? format = null, bool compress = false)
     {
         if (string.IsNullOrEmpty(destPath) || width <= 0 || height <= 0)
