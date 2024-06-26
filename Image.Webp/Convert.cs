@@ -18,10 +18,10 @@ public class Convert
         Bitmap bmp = new(imgStream);
         if (size.HasValue)
         {
-            var webp_byte = webp.EncodeLossless(bmp);
-            bmp = webp.GetThumbnailQuality(webp_byte, size.Value.Width, size.Value.Height);
+            var webp_byte = WebP.EncodeLossless(bmp);
+            bmp = WebP.GetThumbnailQuality(webp_byte, size.Value.Width, size.Value.Height);
         }
-        webp.Save(bmp, destPath, quality);
+        WebP.Save(bmp, destPath, quality);
         bmp.Dispose();
     }
     public static byte[] ToWebPByte(Stream imgStream, Size? size = null, int quality = 100)
@@ -31,10 +31,10 @@ public class Convert
         Bitmap bmp = new(imgStream);
         if (size.HasValue)
         {
-            var webp_byte = webp.EncodeLossless(bmp);
-            bmp = webp.GetThumbnailQuality(webp_byte, size.Value.Width, size.Value.Height);
+            var webp_byte = WebP.EncodeLossless(bmp);
+            bmp = WebP.GetThumbnailQuality(webp_byte, size.Value.Width, size.Value.Height);
         }
-        var data = webp.EncodeLossy(bmp, quality);
+        var data = WebP.EncodeLossy(bmp, quality);
         bmp.Dispose();
         return data;
     }
@@ -44,9 +44,9 @@ public class Convert
             throw new DirectoryNotFoundException();        
         using WebP webp = new();
         Bitmap bmp = new(imgStream);
-        var webp_byte = webp.EncodeLossless(bmp);
-        if (compress) { bmp = webp.GetThumbnailFast(webp_byte, width, height); }
-        else { bmp = webp.GetThumbnailQuality(webp_byte, width, height); }
+        var webp_byte = WebP.EncodeLossless(bmp);
+        if (compress) { bmp = WebP.GetThumbnailFast(webp_byte, width, height); }
+        else { bmp = WebP.GetThumbnailQuality(webp_byte, width, height); }
         bmp.Save(destPath, format ?? ImageFormat.Jpeg);
         bmp.Dispose();
     }    
